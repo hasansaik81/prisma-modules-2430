@@ -1,0 +1,37 @@
+import express, { Router } from "express";
+// import { auth } from "../../lib/auth";
+import auth,{ UserRole } from "../../middlewares/auth";
+import { commentController } from "./comment.controller";
+
+const router=express.Router();
+
+router.get(
+    "/author/:authorId",
+    commentController.getCommentByAuthor
+)
+router.get(
+    "/:commentId", commentController.getCommentById
+)
+router.post(
+    "/",
+    auth(UserRole.USER,UserRole.ADMIN),
+    commentController.createComment
+)
+
+router.delete(
+    "/:commentId",
+    auth(UserRole.USER,UserRole.ADMIN),
+    commentController.deleteComment
+)
+router.patch(
+    "/:commentId",
+    auth(UserRole.USER,UserRole.ADMIN),
+    commentController.updateComment
+)
+
+router.patch(
+    "/:commentId/moderate",
+    auth(UserRole.ADMIN)
+)
+
+export const commentRouter:Router=router;
