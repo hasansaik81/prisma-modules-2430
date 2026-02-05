@@ -6,10 +6,11 @@ async function seedAdmin(){
     try{
         console.log("*** Admin  seeding Started..")
         const adminData={
-            name:"Admin User",
+            name:"Hasan Saik",
             email:"hasansaik81@gmail.com",
             role:UserRole.ADMIN,
-            password:"admin1234"
+            password:"admin1234",
+            emailVerified:true
            
         }
         console.log("*** cheking admin exist or not")
